@@ -42,7 +42,7 @@
     </div>
 
 
-    <?php include "header.php" ?>
+    <?php include "header-opaque.php"; ?>
 
 
     <!-- content

@@ -42,6 +42,7 @@
     </div>
 
 
+    <?php include "header-opaque.php"; ?>
 
 
 

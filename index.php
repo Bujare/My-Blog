@@ -41,7 +41,7 @@
     	<div id="loader"></div>
     </div>
 
-    <?php include "header.php" ?>
+    <?php include "header.php"; ?>
 
     <!-- hero
     ================================================== -->
@@ -138,10 +138,10 @@
             <p>Follow</p>
             <span></span>
             <ul class="s-hero__social-icons">
-                <li><a href="#0"><i class="fab fa-facebook-f" aria-hidden="true"></i></a></li>
-                <li><a href="#0"><i class="fab fa-twitter" aria-hidden="true"></i></a></li>
-                <li><a href="#0"><i class="fab fa-instagram" aria-hidden="true"></i></a></li>
-                <li><a href="#0"><i class="fab fa-dribbble" aria-hidden="true"></i></a></li>
+                <li><a href="https://facebook.com"><i class="fab fa-facebook-f" aria-hidden="true"></i></a></li>
+                <li><a href="https://twitter.com"><i class="fab fa-twitter" aria-hidden="true"></i></a></li>
+                <li><a href="https://instagram.com"><i class="fab fa-instagram" aria-hidden="true"></i></a></li>
+                <li><a href="https://youtube.com"><i class="fab fa-dribbble" aria-hidden="true"></i></a></li>
             </ul>
         </div> <!-- end s-hero__social -->
 

@@ -1,6 +1,6 @@
     <!-- header
     ================================================== -->
-    <header class="s-header">
+    <header class="s-header s-header--opaque">
 
         <div class="s-header__logo">
             <a class="logo" href="index.php">

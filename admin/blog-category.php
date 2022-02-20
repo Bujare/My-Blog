@@ -23,16 +23,46 @@
 			    <div class="row">
                     <div class="col-md-12">
                         <h1 class="page-header">
-                            Blog Posts
+                            Blog Categories
                         </h1>
                     </div>
 
                     <div class="row">
                         <div class="col-lg-12">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    Add A Category
+                                </div>
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <form role="form">
+                                                <div class="form-group">
+                                                    <label>Name</label>
+                                                    <input class="form-control">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Meta Title</label>
+                                                    <input class="form-control">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Category Path(lower case, no spaces)</label>
+                                                    <input class="form-control">
+                                                </div>                                        
+                                                <button type="submit" class="btn btn-default">Add Category</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <!-- /.row (nested) -->
+                                </div>
+                                <!-- /.panel-body -->
+                            </div>
+                            <!-- /.panel -->
+                        </div>
 
                             <div class="panel panel-default">
                                 <div class="panel-heading">
-                                    All Blogs
+                                    All Categories
                                 </div>
                                 <div class="panel-body">
                                     <div class="table-responsive">
@@ -41,15 +71,13 @@
                                                 <tr>
                                                     <th>Id</th>
                                                     <th>Name</th>
-                                                    <th>Category</th>
-                                                    <th>Views</th>
-                                                    <th>Blog Path</th>
+                                                    <th>Meta Title</th>
+                                                    <th>Category Path</th>
                                                     <th>Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <tr>
-                                                    <td></td>
                                                     <td></td>
                                                     <td></td>
                                                     <td></td>
@@ -65,7 +93,6 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
                         <!-- /.col-lg-12 -->
                     </div>
 
