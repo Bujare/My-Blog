@@ -5,16 +5,7 @@
     <!--- basic page needs
     ================================================== -->
     <meta charset="utf-8">
-    <title>
-    <?php 
-    
-    require "admin/includes/dbh.php";
-
-    $query = "SELECT * FROM blog_post";
-    $result = mysqli_query($connection, $query);
-    echo mysqli_num_rows($result);
-    
-    ?></title>
+    <title>Bujare's Blog</title>
     <meta name="description" content="">
     <meta name="author" content="">
 

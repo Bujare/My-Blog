@@ -1,3 +1,13 @@
+<?php
+
+require "includes/dbh.php";
+
+$sqlCategories = "SELECT * FROM blog_category";
+$queryCategories = mysqli_query($connection, $sqlCategories);
+$numCategories = mysqli_num_rows($queryCategories);
+
+?>
+
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -27,6 +37,23 @@
                         </h1>
                     </div>
 
+                    <?php 
+
+                    if (asset($_REQUEST['addcategory'])) {
+                        if ($_REQUEST['addcategory'] == "success") {
+                            echo "div class='alert alert-success'>
+                                <strong>Success!</strong> Category added.
+                            </div>";
+                        }
+                        else if ($_REQUEST['addcategory'] == "error") {
+                            echo "div class='alert alert-danger'>
+                                <strong>Error!</strong> Category was not added, there was an unexpected error.
+                            </div>";
+                        }
+                    }
+
+                    ?>
+
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="panel panel-default">
@@ -36,20 +63,20 @@
                                 <div class="panel-body">
                                     <div class="row">
                                         <div class="col-lg-12">
-                                            <form role="form">
+                                            <form role="form" method="POST" action="includes/add-category.php">
                                                 <div class="form-group">
                                                     <label>Name</label>
-                                                    <input class="form-control">
+                                                    <input class="form-control" name="category-name">
                                                 </div>
                                                 <div class="form-group">
                                                     <label>Meta Title</label>
-                                                    <input class="form-control">
+                                                    <input class="form-control" name="category-meta-title">
                                                 </div>
                                                 <div class="form-group">
                                                     <label>Category Path(lower case, no spaces)</label>
-                                                    <input class="form-control">
+                                                    <input class="form-control" name="category-path">
                                                 </div>                                        
-                                                <button type="submit" class="btn btn-default">Add Category</button>
+                                                <button type="submit" class="btn btn-default" name="add-category-btn">Add Category</button>
                                             </form>
                                         </div>
                                     </div>
@@ -77,17 +104,38 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
+                                                <?php
+
+                                                $counter = 0;
+                                                
+                                                while ($rowCategories = mysqli_fetch_assoc($queryCategories)) {
+                                                
+                                                    $counter++;
+
+                                                    $id = $rowCategories['category_id'];
+                                                    $name = $rowCategories['category_title'];
+                                                    $metaTitle = $rowCategories['category_meta_title'];
+                                                    $categoryPath = $rowCategories['category_path'];
+
+
+                                                ?>
+
                                                 <tr>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
+                                                    <td><?php echo $counter; ?></td>
+                                                    <td><?php echo $name; ?></td>
+                                                    <td><?php echo $metaTitle; ?></td>
+                                                    <td><?php echo $categoryPath; ?></td>
                                                     <td>
                                                         <button>View</button>
                                                         <button>Edit</button>
                                                         <button>Delete</button>
                                                     </td>
                                                 </tr>
+
+                                                <?php
+                                                }
+                                                ?>
+
                                             </tbody>
                                         </table>
                                     </div>
