@@ -43,7 +43,8 @@ require "includes/dbh.php";
                         <div class="panel-body">
                             <div class="row">
                                 <div class="col-lg-12">
-                                    <form role="form" method="POST" action="includes/add-blog.php" enctype="multipart/form-data">
+                                    <form role="form" method="POST" action="includes/add-blog.php" enctype="multipart/
+                                    form-data">
                                         <div class="form-group">
                                             <label>Title</label>
                                             <input class="form-control" name="blog-title">
@@ -75,11 +76,11 @@ require "includes/dbh.php";
                                         </div>
                                         <div class="form-group">
                                             <label>Main Image</label>
-                                            <input type="file" name="main-blog-image">
+                                            <input type="file" name="main-blog-image" id="main-blog-image">
                                         </div>
                                         <div class="form-group">
                                             <label>Alternate Image</label>
-                                            <input type="file" name="alt-blog-image">
+                                            <input type="file" name="alt-blog-image" id="alt-blog-image">
                                         </div>
                                         <div class="form-group">
                                             <label>Summary</label>
@@ -134,12 +135,68 @@ require "includes/dbh.php";
     <!-- JS Scripts-->
     <!-- jQuery Js -->
     <script src="assets/js/jquery-1.10.2.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
       <!-- Bootstrap Js -->
     <script src="assets/js/bootstrap.min.js"></script>
     <!-- Metis Menu Js -->
     <script src="assets/js/jquery.metisMenu.js"></script>
       <!-- Custom Js -->
     <script src="assets/js/custom-scripts.js"></script>
+
+    <script>
+        function validateImage() {
+
+            var main_img = $("#main-blog-image").val();
+            var alt_img = $("#alt-blog-image").val();
+
+            var extension = ['jpg', 'jpeg', 'jpeg', 'gif', 'bmp'];
+
+            var get_ext_main_img = main_img.split('.');
+            var get_ext_alt_img = alt_img.split('.');
+
+            get_ext_main_img = get_ext_main_img.reverse();
+            get_ext_alt_img = get_ext_alt_img.reverse();
+
+            main_image_check = false;
+            alt_image_check = false;
+
+            if (main_img.length > 0) {
+                if ($.inArray(get_ext_main_img[0].toLowerCase(), extension) >= -1) {
+                    main_image_check = true;
+                }
+                else {
+                    alert("Error -> Main Image. Upload only jpg, jpeg, png, gif, bmp images.");
+                    main_img_check = true;
+                }
+            }    
+            else {
+                alert("Please updload a main image.");
+                main_img_check = false;
+            }
+
+            if (alt_img.length > 0) {
+                if ($.inArray(get_ext_alt_img[0].toLowerCase(), extension) >= -1) {
+                    alt_image_check = true;
+                }
+                else {
+                    alert("Error -> Alternate Image. Upload only jpg, jpeg, png, gif, bmp images.");
+                    alt_image_check = true;
+                }
+            }    
+            else {
+                alert("Please updload a alternate image.");
+                alt_image_check = false;
+            }
+
+            if (main_image_check == true && alt_image_check == true) {
+                return true;
+            }
+            else {
+                return false;
+            }
+
+        }
+    </script>
     
    
 </body>

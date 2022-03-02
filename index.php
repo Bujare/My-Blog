@@ -60,12 +60,7 @@
                                 <a href="#0">Lifestyle</a>
                                 <a href="#0">Design</a>
                             </span>
-                            <span class="byline"> 
-                                Posted by 
-                                <span class="author">
-                                    <a href="#0">Jonathan Doe</a>
-                                </span>
-                            </span>
+
                         </div>
                         <h1 class="s-hero__slide-text">
                             <a href="#0">
