@@ -1,3 +1,13 @@
+<?php
+
+require "includes/dbh.php";
+
+$sqlBlogs = "SELECT * FROM blog_post WHERE post_status != '2'";
+$queryBlogs = mysqli_query($connection, $sqlBlogs);
+$numBlogs = mysqli_num_rows($queryBlogs);
+
+?>
+
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -21,14 +31,37 @@
         <div id="page-wrapper" >
             <div id="page-inner">
 			    <div class="row">
-                    <div class="col-md-12">
-                        <h1 class="page-header">
-                            Blog Posts
-                        </h1>
-                    </div>
+                        <div class="col-md-12">
+                            <h1 class="page-header">
+                                Blog Posts
+                            </h1>
+                        </div>
+                </div>
 
-                    <div class="row">
-                        <div class="col-lg-12">
+                            <?php 
+
+                            if (isset($_REQUEST['addblog'])) {
+                                if ($_REQUEST['addblog'] == "success"){
+                                    echo "<div class='alert alert-success'>
+                                        <strong>Success!</strong> Blog Added!
+                                    </div>";
+                                }
+                            }
+
+                            if (isset($_REQUEST['deleteblogpost'])) {
+                                if ($_REQUEST['deleteblogpost'] == "success"){
+                                    echo "<div class='alert alert-success'>
+                                        <strong>Success!</strong> Blog Post Deleted!
+                                    </div>";
+                                }
+                                else if ($_REQUEST['deleteblogpost'] == "error") {
+                                    echo "<div class='alert alert-danger'>
+                                        <strong>Success!</strong> Blog Post was not deleted due to an unexpected error!
+                                    </div>";
+                                }
+                            }
+
+                            ?>
 
                             <div class="panel panel-default">
                                 <div class="panel-heading">
@@ -48,35 +81,80 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
+
+                                                <?php
+
+                                                $counter = 0;
+
+                                                while ($rowBlogs = mysqli_fetch_assoc($queryBlogs)) {
+
+                                                    $counter++;
+                                                    $id = $rowBlogs['blog_post_id'];
+                                                    $name = $rowBlogs['post_title'];
+                                                    $categoryId = $rowBlogs['category_id'];
+                                                    $views = $rowBlogs['blog_post_views'];
+                                                    $blogPath = $rowBlogs['post_path'];
+
+                                                    $sqlGetCategoryName = "SELECT category_title FROM blog_category WHERE category_id = '$categoryId'";
+                                                    $queryGetCategoryName = mysqli_query($connection, $sqlGetCategoryName);
+                                                    if ($rowGetCategoryName = mysqli_fetch_assoc($queryGetCategoryName)) {
+                                                        $categoryName = $rowGetCategoryName['category_title'];
+                                                    }                                        
+
+                                                ?>
+
                                                 <tr>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
+                                                    <td><?php echo $counter; ?></td>
+                                                    <td><?php echo $name; ?></td>
+                                                    <td><?php echo $categoryName; ?></td>
+                                                    <td><?php echo $views; ?></td>
+                                                    <td><?php echo $blogPath; ?></td>
                                                     <td>
-                                                        <button>View</button>
-                                                        <button>Edit</button>
-                                                        <button>Delete</button>
+                                                        <button class="pop-button" onclick="window.open('../single-blog.php?blog=<?php echo $blogPath; ?>', '_blank');">View</button>
+                                                        <button class="popup-button" onclick="location.href='edit-blog.php?blogid=<?php echo $id; ?>'">Edit</button>
+                                                        <button class="popup-button" data-toggle="modal" data-target="#delete<?php echo $id; ?>">Delete</button>
                                                     </td>
                                                 </tr>
+                                                <div class="modal fade" id="delete<?php echo $id; ?>" tabindex="-1" role="dialog" 
+                                                    aria-labelledby="myModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog">
+                                                            <div class="modal-content">
+                                                                <form method="POST" action="includes/delete-blog-post.php">
+                                                                    <div class="modal-header">
+                                                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                                                        <h4 class="modal-title" id="myModalLabel">Delete Blog Post</h4>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <input type="hidden" name="blog-post-id" value="<?php echo $id; ?>">
+                                                                        <p>Are you sure that you want to delete this blog post?</p>
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" class="btn btn-default" 
+                                                                        data-dismiss="modal">Close</button>
+                                                                        <button type="submit" class="btn btn-primary" 
+                                                                        name="delete-blog-post-btn">Delete</button>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                <?php } ?>
                                             </tbody>
                                         </table>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <!-- /.col-lg-12 -->
-                    </div>
 
-                </div> 
-                 <!-- /. ROW  -->
+
+                
                  <?php include "footer.php"; ?>
-				</div>
-             <!-- /. PAGE INNER  -->
+		
+
             </div>
-         <!-- /. PAGE WRAPPER  -->
         </div>
+
+    </div>
      <!-- /. WRAPPER  -->
     <!-- JS Scripts-->
     <!-- jQuery Js -->
