@@ -6,7 +6,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.php">Bujare's Blog</a>
+                <a class="navbar-brand" href="../index.php" target="_blank">Bujare's Blog</a>
             </div>
 
             

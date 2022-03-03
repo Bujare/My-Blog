@@ -204,7 +204,8 @@ session_start();
                                             </div>
                                             <div class="form-group">
                                                 <label>Blog Content</label>
-                                                <textarea class="form-control" rows="3" name="blog-content" id="summernote"><?php if (isset($_SESSION['blogContent'])) { echo $_SESSION['blogContent']; } ?></textarea>
+                                                <textarea class="form-control" rows="3" name="blog-content" id="summernote"><?php if (isset($_SESSION['blogContent'])) { echo $_SESSION['blogContent']; } ?>
+                                                </textarea>
                                             </div>
                                             <div class="form-group">
                                                 <label>Blog Tags (seperated by comma)</label>
@@ -260,20 +261,19 @@ session_start();
     <!-- Bootstrap Js -->
     <script src="assets/js/bootstrap.min.js"></script>
     <!-- Metis Menu Js -->
-    <!-- <script src="assets/js/jquery.metisMenu.js"></script> -->
+    <script src="assets/js/jquery.metisMenu.js"></script>
     <!-- Custom Js -->
-    <!-- <script src="assets/js/custom-scripts.js"></script> -->
+    <script src="assets/js/custom-scripts.js"></script>
     <!-- Summernote -->
     <script src="summernote/summernote.min.js"></script>
 
     <script>
         $(document).ready(function() {
             $('#summernote').summernote({
-                height: 300;
-                minHeight: null;
-                maxHeight: null;
-                focus: false;
-
+                height: 300,
+                minHeight: null,
+                maxHeight: null,
+                focus: false
             });
         });
     </script>

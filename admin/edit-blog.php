@@ -384,10 +384,10 @@ if ($rowGetImages = mysqli_fetch_assoc($queryGetImages)) {
 <script>
     $(document).ready(function() {
         $('#summernote').summernote({
-            height: 600;
-            minHeight: null;
-            maxHeight: null;
-            focus: false;
+            height: 300,
+            minHeight: null,
+            maxHeight: null,
+            focus: false
 
         });
     });
