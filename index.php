@@ -1,3 +1,9 @@
+<?php
+
+require "admin/includes/dbh.php";
+
+?>
+
 <!DOCTYPE html>
 <html class="no-js" lang="en">
 <head>
@@ -49,83 +55,124 @@
 
         <div class="s-hero__slider">
 
-            <div class="s-hero__slide">
+            <?php
 
-                <div class="s-hero__slide-bg" style="background-image: url('images/slide1-bg-3000.jpg');"></div>
+            $sqlGetFirstBlog = "SELECT * FROM blog_post INNER JOIN blog_category ON blog_post.category_id = blog_categery.category_id WHERE home_page_placement = '1' AND post_status != '2' LIMIT 1";
+            $queryGetFirstBlog = mysqli_query($connection, $sqlGetFirstBlog);
 
-                <div class="row s-hero__slide-content animate-this">
-                    <div class="column">
-                        <div class="s-hero__slide-meta">
-                            <span class="cat-links">
-                                <a href="#0">Lifestyle</a>
-                                <a href="#0">Design</a>
-                            </span>
+            if ($rowGetFirstBlog = mysqli_fetch_assoc($queryGetFirstBlog)) {
 
+                $firstBlogCategory = $rowGetFirstBlog['category_title'];
+                $firstBlogCategoryPath = $rowGetFirstBlog['category_path'];
+                $firstBlogTitle = $rowGetFirstBlog['post_title'];
+                $firstBlogPath = $rowGetFirstBlog['post_path'];
+                $firstBlogMainImageUrl = $rowGetFirstBlog['main_image_url'];
+                ?>
+
+                <div class="s-hero__slide">
+                    <div class="s-hero__slide-bg" style="background-image: url('<?php echo $firstBlogMainImageUrl; ?>');"></div>
+                    <div class="row s-hero__slide-content animate-this">
+                        <div class="column">
+                            <div class="s-hero__slide-meta">
+                                <span class="cat-links">
+                                    <a href="categories.php?group=<?php echo $firstBlogCategoryPath; ?>"><?php echo $firstBlogCategory; ?></a>
+                                </span>
+                                <span class="byline">
+                                    Posted by
+                                    <span class="author">
+                                        <a href="#">Bujare Ndrecaj</a>
+                                    </span>     
+                                </span>
+
+                            </div>
+                            <h1 class="s-hero__slide-text">
+                                <a href="single-blog.php?blog=<?php echo $firstBlogPath; ?>"><?php echo $firstBlogTitle; ?></a>
+                            </h1>
                         </div>
-                        <h1 class="s-hero__slide-text">
-                            <a href="#0">
-                                Tips and Ideas to Help You Start Freelancing.
-                            </a>
-                        </h1>
                     </div>
-                </div>
+                </div> 
 
-            </div> <!-- end s-hero__slide -->
+                <?php            
+            }
+            
+            $sqlGetSecondBlog = "SELECT * FROM blog_post INNER JOIN blog_category ON blog_post.category_id = blog_categery.category_id WHERE home_page_placement = '2' AND post_status != '2' LIMIT 1";
+            $queryGetSecondBlog = mysqli_query($connection, $sqlGetSecondBlog);
+
+            if ($rowGetSecondBlog = mysqli_fetch_assoc($queryGetSecondBlog)) {
+
+                $secondBlogCategory = $rowGetSecondBlog['category_title'];
+                $secondBlogCategoryPath = $rowGetSecondBlog['category_path'];
+                $secondBlogTitle = $rowGetSecondBlog['post_title'];
+                $secondBlogPath = $rowGetSecondBlog['post_path'];
+                $secondBlogMainImageUrl = $rowGetSecondBlog['main_image_url'];
+
+            ?>
 
             <div class="s-hero__slide">
-
-                <div class="s-hero__slide-bg" style="background-image: url('images/slide2-bg-3000.jpg');"></div>
-
+                <div class="s-hero__slide-bg" style="background-image: url('<?php echo $secondBlogMainImageUrl; ?>');"></div>
                 <div class="row s-hero__slide-content animate-this">
                     <div class="column">
                         <div class="s-hero__slide-meta">
                             <span class="cat-links">
-                                <a href="#0">Work</a>
+                                <a href="categories.php?group=<?php echo $secondBlogCategoryPath; ?>"><?php echo $secondBlogCategory; ?></a>
                             </span>
                             <span class="byline"> 
                                 Posted by 
                                 <span class="author">
-                                    <a href="#0">Juan Dela Cruz</a>
+                                    <a href="#">Bujare Ndrecaj</a>
                                 </span>
                             </span>
                         </div>
                         <h1 class="s-hero__slide-text">
-                            <a href="#0">
-                                Minimalism: The Art of Keeping It Simple.
-                            </a>
+                            <a href="single-blog.php?blog=<?php echo $secondBlogPath; ?>"><?php echo $secondBlogTitle; ?></a>
                         </h1>
                     </div>
                 </div>
+            </div>
 
-            </div> <!-- end s-hero__slide -->
+            <?php
+            }
 
-            <div class="s-hero__slide"">
+                        
+            $sqlGetThirdBlog = "SELECT * FROM blog_post INNER JOIN blog_category ON blog_post.category_id = blog_categery.category_id WHERE home_page_placement = '3' AND post_status != '2' LIMIT 1";
+            $queryGetThirdBlog = mysqli_query($connection, $sqlGetThirdBlog);
 
-                <div class="s-hero__slide-bg" style="background-image: url('images/slide3-bg-3000.jpg');"></div>
+            if ($rowGetThirdBlog = mysqli_fetch_assoc($queryGetThirdBlog)) {
+
+                $thirdBlogCategory = $rowGetThirdBlog['category_title'];
+                $thirdBlogCategoryPath = $rowGetThirdBlog['category_path'];
+                $thirdBlogTitle = $rowGetThirdBlog['post_title'];
+                $thirdBlogPath = $rowGetThirdBlog['post_path'];
+                $thirdBlogMainImageUrl = $rowGetThirdBlog['main_image_url'];
+
+            ?>
+
+            <div class="s-hero__slide">
+
+                <div class="s-hero__slide-bg" style="background-image: url('<?php echo $thirdBlogMainImageUrl; ?>');"></div>
 
                 <div class="row s-hero__slide-content animate-this">
                     <div class="column">
                         <div class="s-hero__slide-meta">
                             <span class="cat-links">
-                                <a href="#0">Health</a>
-                                <a href="#0">Lifestyle</a>
+                                <a href="categories.php?group=<?php echo $thirdBlogCategoryPath; ?>"></a>
                             </span>
                             <span class="byline"> 
                                 Posted by 
                                 <span class="author">
-                                    <a href="#0">Jane Doe</a>
+                                    <a href="#">Bujare Ndrecaj</a>
                                 </span>
                             </span>
                         </div>
                         <h1 class="s-hero__slide-text">
-                            <a href="#0">
-                                10 Reasons Why Being in Nature Is Good For You.
-                            </a>
+                            <a href="single-blog.php?blog=<?php echo $thisBlogPath; ?>"><?php echo $thirdBlogTitle; ?></a>
                         </h1>
                     </div>
                 </div>
 
-            </div> <!-- end s-hero__slide -->
+            </div>
+
+            <?php } ?>
 
         </div> <!-- end s-hero__slider -->
 
@@ -186,7 +233,7 @@
                                 <h1 class="entry__title"><a href="https://www.dreamhost.com/r.cgi?287326">Need Web Hosting for Your Websites?</a></h1>
                                 
                                 <div class="entry__meta">
-                                    <span class="byline"">By:
+                                    <span class="byline">
                                         <span class='author'>
                                             <a href="https://www.dreamhost.com/r.cgi?287326">StyleShout</a>
                                     </span>
@@ -221,7 +268,7 @@
                                 <h1 class="entry__title"><a href="single-standard.html">Just a Normal Simple Blog Post.</a></h1>
         
                                 <div class="entry__meta">
-                                    <span class="byline"">By:
+                                    <span class="byline">
                                         <span class='author'>
                                             <a href="#0">Naruto Uzumaki</a>
                                     </span>
@@ -256,7 +303,7 @@
                                 <h1 class="entry__title"><a href="single-standard.html">10 Interesting Facts About Caffeine.</a></h1>
                                 
                                 <div class="entry__meta">
-                                    <span class="byline"">By:
+                                    <span class="byline">
                                         <span class='author'>
                                             <a href="#0">Shikamaru Nara</a>
                                     </span>
@@ -324,7 +371,7 @@
                                 <h1 class="entry__title"><a href="single-standard.html">Using Repetition and Patterns in Photography.</a></h1>
                                 
                                 <div class="entry__meta">
-                                    <span class="byline"">By:
+                                    <span class="byline">
                                         <span class='author'>
                                             <a href="#0">Naruto Uzumaki</a>
                                     </span>
@@ -360,7 +407,7 @@
                                 <h1 class="entry__title"><a href="single-standard.html">Create Meaningful Family Moments.</a></h1>
                                 
                                 <div class="entry__meta">
-                                    <span class="byline"">By:
+                                    <span class="byline">
                                         <span class='author'>
                                             <a href="#0">Naruto Uzumaki</a>
                                     </span>
@@ -395,7 +442,7 @@
                                 <h1 class="entry__title"><a href="single-standard.html">How We Live Is What Makes Us Real.</a></h1>
                                 
                                 <div class="entry__meta">
-                                    <span class="byline"">By:
+                                    <span class="byline">
                                         <span class='author'>
                                             <a href="#0">Naruto Uzumaki</a>
                                     </span>
@@ -430,7 +477,7 @@
                                 <h1 class="entry__title"><a href="single-standard.html">Symmetry In Modern Design.</a></h1>
                                 
                                 <div class="entry__meta">
-                                    <span class="byline"">By:
+                                    <span class="byline">
                                         <span class='author'>
                                             <a href="#0">Kakakshi Hatake</a>
                                     </span>
@@ -465,7 +512,7 @@
                                 <h1 class="entry__title"><a href="single-standard.html">10 Tips for Managing Time Effectively.</a></h1>
     
                                 <div class="entry__meta">
-                                    <span class="byline"">By:
+                                    <span class="byline">
                                         <span class='author'>
                                             <a href="#0">John Doe</a>
                                     </span>
@@ -500,7 +547,7 @@
                                 <h1 class="entry__title"><a href="single-standard.html">Throwback To The Good Old Days.</a></h1>
                                 
                                 <div class="entry__meta">
-                                    <span class="byline"">By:
+                                    <span class="byline">
                                         <span class='author'>
                                             <a href="#0">Sakura Haruno</a>
                                     </span>
@@ -534,7 +581,7 @@
                                 <h1 class="entry__title"><a href="single-standard.html">3 Reasons to Keep Your Workplace Tidy.</a></h1>
                                 
                                 <div class="entry__meta">
-                                    <span class="byline"">By:
+                                    <span class="byline">
                                         <span class='author'>
                                             <a href="#0">Sakura Haruno</a>
                                     </span>
@@ -568,7 +615,7 @@
                                 <h1 class="entry__title"><a href="single-standard.html">What The Beach Does to Your Brain.</a></h1>
                                 
                                 <div class="entry__meta">
-                                    <span class="byline"">By:
+                                    <span class="byline">
                                         <span class='author'>
                                             <a href="#0">Naruto Uzumaki</a>
                                     </span>
