@@ -135,7 +135,6 @@ session_start();
                         }
                     }
 
-
                     ?>
                     
                     <div class="row">
@@ -180,9 +179,9 @@ session_start();
                                                             }
 
                                                         }
-
+                                                        else {
                                                         echo "<option value='".$categoryId."'>".$categoryName."</option>";
-
+                                                        }
                                                     }
 
                                                     ?>
