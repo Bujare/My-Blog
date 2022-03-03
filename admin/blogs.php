@@ -1,6 +1,8 @@
 <?php
 
 require "includes/dbh.php";
+include "includes/unset-sessions.php";
+
 
 $sqlBlogs = "SELECT * FROM blog_post WHERE post_status != '2'";
 $queryBlogs = mysqli_query($connection, $sqlBlogs);

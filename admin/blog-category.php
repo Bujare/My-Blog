@@ -1,6 +1,8 @@
 <?php
 
 require "includes/dbh.php";
+include "includes/unset-sessions.php";
+
 
 $sqlCategories = "SELECT * FROM blog_category";
 $queryCategories = mysqli_query($connection, $sqlCategories);

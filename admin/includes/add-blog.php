@@ -87,21 +87,31 @@ if (isset($_POST['submit-blog'])) {
     '$title', '$metaTitle', '$blogPath', '$blogSummary', '$blogContent', '$mainImgUrl', '$altImgUrl', '$homePagePlacement', '1', '$date', '$time')";
 
     if (mysqli_query($connection, $sqlAddBlog)) {
-        mysqli_close($connection);
+        
+        $blogPostId = mysqli_insert_id($connection);
+        $sqlAddTags = "INSERT INTO blog_tags (blog_post_id, tag) VALUES ('$blogPostId', '$blogTags')";
 
-        unset($_SESSION['blogTitle']);
-        unset($_SESSION['blogMetaTitle']);
-        unset($_SESSION['blogCategoryId']);
-        unset($_SESSION['blogSummary']);
-        unset($_SESSION['blogContent']);
-        unset($_SESSION['blogTags']);
-        unset($_SESSION['blogPath']);
-        unset($_SESSION['blogHomePagePlacement']);
+        if (mysqli_query($connection, $sqlAddTags)) {
+            
+            mysqli_close($connection);
 
-
-        header("Location: ../blogs.php?addblog=success");
-        exit();
+            unset($_SESSION['blogTitle']);
+            unset($_SESSION['blogMetaTitle']);
+            unset($_SESSION['blogCategoryId']);
+            unset($_SESSION['blogSummary']);
+            unset($_SESSION['blogContent']);
+            unset($_SESSION['blogTags']);
+            unset($_SESSION['blogPath']);
+            unset($_SESSION['blogHomePagePlacement']);
+    
+    
+            header("Location: ../blogs.php?addblog=success");
+            exit();
+        }
+    
     }
+
+       
     else {
         formError("sqlerror");
     }

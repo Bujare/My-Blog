@@ -108,7 +108,9 @@ if (isset($_POST['submit-edit-blog'])) {
         alt_image_url = '$altImgUrl', home_page_placement = '$homePagePlacement', date_updated = '$date', time_updated = '$time' WHERE blog_post_id = '$blogId'";
     }
 
-    if (mysqli_query($connection, $sqlUpdateBlog)) {
+    $sqlUpdateTags = "UPDATE blog_tags SET tag = '$blogTags' WHERE blog_post_id = '$blogId'";
+
+    if (mysqli_query($connection, $sqlUpdateBlog) && mysqli_query($connection, $sqlUpdateTags)) {
         formSuccess();
     }
     else {
