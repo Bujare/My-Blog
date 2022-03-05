@@ -11,7 +11,7 @@ require "admin/includes/dbh.php";
     <!--- basic page needs
     ================================================== -->
     <meta charset="utf-8">
-    <title>Bujare's Blog</title>
+    <title>Bujare</title>
     <meta name="description" content="">
     <meta name="author" content="">
 
@@ -56,8 +56,8 @@ require "admin/includes/dbh.php";
         <div class="s-hero__slider">
 
             <?php
-
-            $sqlGetFirstBlog = "SELECT * FROM blog_post INNER JOIN blog_category ON blog_post.category_id = blog_categery.category_id WHERE home_page_placement = '1' AND post_status != '2' LIMIT 1";
+            
+            $sqlGetFirstBlog = "SELECT * FROM blog_post INNER JOIN blog_category ON blog_post.category_id = blog_category.category_id WHERE home_page_placement = '1' AND post_status != '2' LIMIT 1";            
             $queryGetFirstBlog = mysqli_query($connection, $sqlGetFirstBlog);
 
             if ($rowGetFirstBlog = mysqli_fetch_assoc($queryGetFirstBlog)) {
@@ -67,35 +67,34 @@ require "admin/includes/dbh.php";
                 $firstBlogTitle = $rowGetFirstBlog['post_title'];
                 $firstBlogPath = $rowGetFirstBlog['post_path'];
                 $firstBlogMainImageUrl = $rowGetFirstBlog['main_image_url'];
-                ?>
+            ?>
 
-                <div class="s-hero__slide">
-                    <div class="s-hero__slide-bg" style="background-image: url('<?php echo $firstBlogMainImageUrl; ?>');"></div>
-                    <div class="row s-hero__slide-content animate-this">
-                        <div class="column">
-                            <div class="s-hero__slide-meta">
-                                <span class="cat-links">
-                                    <a href="categories.php?group=<?php echo $firstBlogCategoryPath; ?>"><?php echo $firstBlogCategory; ?></a>
+            <div class="s-hero__slide">
+                <div class="s-hero__slide-bg" style="background-image: url('<?php echo $firstBlogMainImageUrl ?>');"></div>
+                <div class="row s-hero__slide-content animate-this">
+                    <div class="column">
+                        <div class="s-hero__slide-meta">
+                            <span class="cat-links">
+                                <a href="categories.php?group=<?php echo $firstBlogCategoryPath ?>"><?php echo $firstBlogCategory; ?></a>
+                            </span>
+                            <span class="byline"> 
+                                Posted by 
+                                <span class="author">
+                                    <a href="#">Bujare Ndrecaj</a>
                                 </span>
-                                <span class="byline">
-                                    Posted by
-                                    <span class="author">
-                                        <a href="#">Bujare Ndrecaj</a>
-                                    </span>     
-                                </span>
-
-                            </div>
-                            <h1 class="s-hero__slide-text">
-                                <a href="single-blog.php?blog=<?php echo $firstBlogPath; ?>"><?php echo $firstBlogTitle; ?></a>
-                            </h1>
+                            </span>
                         </div>
+                        <h1 class="s-hero__slide-text">
+                            <a href="single-blog.php?blog=<?php echo $firstBlogPath; ?>"><?php echo $firstBlogTitle; ?></a>
+                        </h1>
                     </div>
-                </div> 
+                </div>
+            </div> 
 
-                <?php            
+            <?php
             }
-            
-            $sqlGetSecondBlog = "SELECT * FROM blog_post INNER JOIN blog_category ON blog_post.category_id = blog_categery.category_id WHERE home_page_placement = '2' AND post_status != '2' LIMIT 1";
+
+            $sqlGetSecondBlog = "SELECT * FROM blog_post INNER JOIN blog_category ON blog_post.category_id = blog_category.category_id WHERE home_page_placement = '2' AND post_status != '2' LIMIT 1";            
             $queryGetSecondBlog = mysqli_query($connection, $sqlGetSecondBlog);
 
             if ($rowGetSecondBlog = mysqli_fetch_assoc($queryGetSecondBlog)) {
@@ -109,7 +108,7 @@ require "admin/includes/dbh.php";
             ?>
 
             <div class="s-hero__slide">
-                <div class="s-hero__slide-bg" style="background-image: url('<?php echo $secondBlogMainImageUrl; ?>');"></div>
+                <div class="s-hero__slide-bg" style="background-image: url('<?php echo $secondBlogMainImageUrl ?>');"></div>
                 <div class="row s-hero__slide-content animate-this">
                     <div class="column">
                         <div class="s-hero__slide-meta">
@@ -119,7 +118,7 @@ require "admin/includes/dbh.php";
                             <span class="byline"> 
                                 Posted by 
                                 <span class="author">
-                                    <a href="#">Bujare Ndrecaj</a>
+                                    <a href="#">Test Test</a>
                                 </span>
                             </span>
                         </div>
@@ -128,13 +127,12 @@ require "admin/includes/dbh.php";
                         </h1>
                     </div>
                 </div>
-            </div>
+            </div> 
 
-            <?php
+            <?php 
             }
 
-                        
-            $sqlGetThirdBlog = "SELECT * FROM blog_post INNER JOIN blog_category ON blog_post.category_id = blog_categery.category_id WHERE home_page_placement = '3' AND post_status != '2' LIMIT 1";
+            $sqlGetThirdBlog = "SELECT * FROM blog_post INNER JOIN blog_category ON blog_post.category_id = blog_category.category_id WHERE home_page_placement = '3' AND post_status != '2' LIMIT 1";            
             $queryGetThirdBlog = mysqli_query($connection, $sqlGetThirdBlog);
 
             if ($rowGetThirdBlog = mysqli_fetch_assoc($queryGetThirdBlog)) {
@@ -144,33 +142,30 @@ require "admin/includes/dbh.php";
                 $thirdBlogTitle = $rowGetThirdBlog['post_title'];
                 $thirdBlogPath = $rowGetThirdBlog['post_path'];
                 $thirdBlogMainImageUrl = $rowGetThirdBlog['main_image_url'];
-
+            
             ?>
 
-            <div class="s-hero__slide">
-
-                <div class="s-hero__slide-bg" style="background-image: url('<?php echo $thirdBlogMainImageUrl; ?>');"></div>
-
+            <div class="s-hero__slide"">
+                <div class="s-hero__slide-bg" style="background-image: url('<?php echo $thirdBlogMainImageUrl ?>');"></div>
                 <div class="row s-hero__slide-content animate-this">
                     <div class="column">
                         <div class="s-hero__slide-meta">
                             <span class="cat-links">
-                                <a href="categories.php?group=<?php echo $thirdBlogCategoryPath; ?>"></a>
+                                <a href="categories.php?group=<?php echo $thirdBlogCategoryPath; ?>"><?php echo $thirdBlogCategory; ?></a>
                             </span>
                             <span class="byline"> 
                                 Posted by 
                                 <span class="author">
-                                    <a href="#">Bujare Ndrecaj</a>
+                                    <a href="#0">Test Test</a>
                                 </span>
                             </span>
                         </div>
                         <h1 class="s-hero__slide-text">
-                            <a href="single-blog.php?blog=<?php echo $thisBlogPath; ?>"><?php echo $thirdBlogTitle; ?></a>
+                            <a href="single-blog.php?blog=<?php echo $thirdBlogPath; ?>"><?php echo $thirdBlogTitle; ?></a>
                         </h1>
                     </div>
                 </div>
-
-            </div>
+            </div> 
 
             <?php } ?>
 
@@ -233,7 +228,7 @@ require "admin/includes/dbh.php";
                                 <h1 class="entry__title"><a href="https://www.dreamhost.com/r.cgi?287326">Need Web Hosting for Your Websites?</a></h1>
                                 
                                 <div class="entry__meta">
-                                    <span class="byline">
+                                    <span class="byline"">By:
                                         <span class='author'>
                                             <a href="https://www.dreamhost.com/r.cgi?287326">StyleShout</a>
                                     </span>
@@ -268,9 +263,9 @@ require "admin/includes/dbh.php";
                                 <h1 class="entry__title"><a href="single-standard.html">Just a Normal Simple Blog Post.</a></h1>
         
                                 <div class="entry__meta">
-                                    <span class="byline">
+                                    <span class="byline"">By:
                                         <span class='author'>
-                                            <a href="#0">Naruto Uzumaki</a>
+                                            <a href="#0">Test Test</a>
                                     </span>
                                 </span>
                                     <span class="cat-links">
@@ -303,9 +298,9 @@ require "admin/includes/dbh.php";
                                 <h1 class="entry__title"><a href="single-standard.html">10 Interesting Facts About Caffeine.</a></h1>
                                 
                                 <div class="entry__meta">
-                                    <span class="byline">
+                                    <span class="byline"">By:
                                         <span class='author'>
-                                            <a href="#0">Shikamaru Nara</a>
+                                            <a href="#0">Test Test</a>
                                     </span>
                                 </span>
                                     <span class="cat-links">
@@ -339,7 +334,7 @@ require "admin/includes/dbh.php";
                                 <div class="entry__meta">
                                     <span class="byline"">By:
                                         <span class='author'>
-                                            <a href="#0">Susuke Uchiha</a>
+                                            <a href="#0">Test Test</a>
                                         </span>
                                     </span>
                                     <span class="cat-links">
@@ -371,9 +366,9 @@ require "admin/includes/dbh.php";
                                 <h1 class="entry__title"><a href="single-standard.html">Using Repetition and Patterns in Photography.</a></h1>
                                 
                                 <div class="entry__meta">
-                                    <span class="byline">
+                                    <span class="byline"">By:
                                         <span class='author'>
-                                            <a href="#0">Naruto Uzumaki</a>
+                                            <a href="#0">Test Test</a>
                                     </span>
                                 </span>
                                     <span class="cat-links">
@@ -407,9 +402,9 @@ require "admin/includes/dbh.php";
                                 <h1 class="entry__title"><a href="single-standard.html">Create Meaningful Family Moments.</a></h1>
                                 
                                 <div class="entry__meta">
-                                    <span class="byline">
+                                    <span class="byline"">By:
                                         <span class='author'>
-                                            <a href="#0">Naruto Uzumaki</a>
+                                            <a href="#0">Test test</a>
                                     </span>
                                 </span>
                                     <span class="cat-links">
@@ -442,9 +437,9 @@ require "admin/includes/dbh.php";
                                 <h1 class="entry__title"><a href="single-standard.html">How We Live Is What Makes Us Real.</a></h1>
                                 
                                 <div class="entry__meta">
-                                    <span class="byline">
+                                    <span class="byline"">By:
                                         <span class='author'>
-                                            <a href="#0">Naruto Uzumaki</a>
+                                            <a href="#0">Test Test</a>
                                     </span>
                                 </span>
                                     <span class="cat-links">
@@ -477,9 +472,9 @@ require "admin/includes/dbh.php";
                                 <h1 class="entry__title"><a href="single-standard.html">Symmetry In Modern Design.</a></h1>
                                 
                                 <div class="entry__meta">
-                                    <span class="byline">
+                                    <span class="byline"">By:
                                         <span class='author'>
-                                            <a href="#0">Kakakshi Hatake</a>
+                                            <a href="#0">Test Test</a>
                                     </span>
                                 </span>
                                     <span class="cat-links">
@@ -512,9 +507,9 @@ require "admin/includes/dbh.php";
                                 <h1 class="entry__title"><a href="single-standard.html">10 Tips for Managing Time Effectively.</a></h1>
     
                                 <div class="entry__meta">
-                                    <span class="byline">
+                                    <span class="byline"">By:
                                         <span class='author'>
-                                            <a href="#0">John Doe</a>
+                                            <a href="#0">Test Test</a>
                                     </span>
                                 </span>
                                     <span class="cat-links">
@@ -547,9 +542,9 @@ require "admin/includes/dbh.php";
                                 <h1 class="entry__title"><a href="single-standard.html">Throwback To The Good Old Days.</a></h1>
                                 
                                 <div class="entry__meta">
-                                    <span class="byline">
+                                    <span class="byline"">By:
                                         <span class='author'>
-                                            <a href="#0">Sakura Haruno</a>
+                                            <a href="#0">Test Teest</a>
                                     </span>
                                 </span>
                                     <span class="cat-links">
@@ -581,9 +576,9 @@ require "admin/includes/dbh.php";
                                 <h1 class="entry__title"><a href="single-standard.html">3 Reasons to Keep Your Workplace Tidy.</a></h1>
                                 
                                 <div class="entry__meta">
-                                    <span class="byline">
+                                    <span class="byline"">By:
                                         <span class='author'>
-                                            <a href="#0">Sakura Haruno</a>
+                                            <a href="#0">Test Test</a>
                                     </span>
                                 </span>
                                     <span class="cat-links">
@@ -615,9 +610,9 @@ require "admin/includes/dbh.php";
                                 <h1 class="entry__title"><a href="single-standard.html">What The Beach Does to Your Brain.</a></h1>
                                 
                                 <div class="entry__meta">
-                                    <span class="byline">
+                                    <span class="byline"">By:
                                         <span class='author'>
-                                            <a href="#0">Naruto Uzumaki</a>
+                                            <a href="#0">Test Test</a>
                                     </span>
                                 </span>
                                     <span class="cat-links">
@@ -670,9 +665,7 @@ require "admin/includes/dbh.php";
 
     </section> <!-- end s-content -->
 
-
-    <?php include "footer.php";?>
-
+    <?php include "footer.php"; ?>
 
     <!-- Java Script
     ================================================== -->
