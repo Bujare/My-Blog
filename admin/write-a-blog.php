@@ -209,15 +209,13 @@ session_start();
                                             </div>
                                             <div class="form-group">
                                                 <label>Blog Tags (seperated by comma)</label>
-                                                <input class="form-control" name="blog-tags" 
-                                                value="<?php if (isset($_SESSION['blogTags'])) { echo $_SESSION['blogTags']; } ?>">
+                                                <input class="form-control" name="blog-tags" value="<?php if (isset($_SESSION['blogTags'])) { echo $_SESSION['blogTags']; } ?>">
                                             </div> 
                                             <div class="form-group">
                                                 <label>Blog Path</label>
                                                 <div class="input-group">
                                                     <span class="input-group-addon">www.bujare's blog.com/</span>
-                                                    <input type="text" class="form-control" name="blog-path" 
-                                                    value="<?php if (isset($_SESSION['blogPath'])) { echo $_SESSION['blogPath']; } ?>">
+                                                    <input type="text" class="form-control" name="blog-path" value="<?php if (isset($_SESSION['blogPath'])) { echo $_SESSION['blogPath']; } ?>">
                                                 </div>
                                             </div>                                   
                                             <div class="form-group">

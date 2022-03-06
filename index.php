@@ -222,8 +222,10 @@ require "admin/includes/dbh.php";
 
                         $blogTitle = $rowGetAllBlogs['post_title'];
                         $blogPath = $rowGetAllBlogs['post_path'];
-                        $blogSummary = $rowGetAllBlogs['post_sumary'];
-                        //$blogAltImageUrl - $rowGetAllBlogs['alt_image_url'];
+                        $blogSummary = $rowGetAllBlogs['post_sumary'];                        
+                        $blogAltImageUrl = $rowGetAllBlogs['alt_image_url'];
+
+                        
                     
                     
                     ?>
@@ -242,7 +244,7 @@ require "admin/includes/dbh.php";
                                 <h1 class="entry__title"><a href="single-blog.php?blog=<?php echo $blogPath; ?>"><?php echo $blogTitle; ?></a></h1>
                                 
                                 <div class="entry__meta">
-                                    <span class="byline"">By:
+                                    <span class="byline">By:
                                         <span class='author'>
                                             <a href="#">Bujare Ndrecaj</a>
                                         </span>
