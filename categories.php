@@ -1,3 +1,8 @@
+<?php 
+
+require "admin/includes/dbh.php";
+
+?>
 <!DOCTYPE html>
 <html class="no-js" lang="en">
 <head>
