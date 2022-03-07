@@ -330,6 +330,40 @@ if (isset($_REQUEST['blog'])) {
                 </div> <!-- end col-full -->
             </div> <!-- end comments -->
 
+            <div class="row comment-respond">
+
+            <!-- START respond -->
+            <div id="respond" class="column">
+
+                <h3 id="reply-h3"></h3>
+
+                <p style="color:green;display:none;" id="reply-success">Your reply was added successfully. Refresh your page to view it.</p>
+                <p style="color:red;display:none;" id="reply-error"></p>
+
+
+                <form name="replyForm" id="replyForm">
+                    <fieldset>
+                        <input type="hidden" name="replyBlogPostId" id="replyBlogPostId" value="<?php echo $blogPostId; ?>">
+                        <div class="form-field">
+                        <input type="hidden" name="commentParentId" id="commentParentId" value="">
+                        <div class="form-field">
+                            <input name="replyCName" id="replyCName" class="h-full-width h-remove-bottom" placeholder="Your Name" value="" type="text">
+                        </div>
+                        <div class="form-field">
+                            <input name="replyCEmail" id="replyCEmail" class="h-full-width h-remove-bottom" placeholder="Your Email" value="" type="text">
+                        </div>
+                        <div class="message form-field">
+                            <textarea name="replyCMessage" id="replyCMessage" class="h-full-width" placeholder="Your Message"></textarea>
+                        </div>
+                        <br>
+                        <input name="submit" id="submitReplyForm" class="btn btn--primary btn-wide btn--large h-full-width" value="Reply" type="submit">
+                        <input name="submit" id="addComment" class="btn btn--primary btn-wide btn--large h-full-width" value="Add Comment" onclick="prepareComment();">
+                    </fieldset>
+                </form> <!-- end form -->
+            </div>
+            <!-- END respond-->
+
+            </div> <!-- end comment-respond -->
 
             <div class="row comment-respond">
 
@@ -398,6 +432,16 @@ if (isset($_REQUEST['blog'])) {
             }
         }
 
+        function prepareReply(commentId) {
+            $("#comment-success").css("display", "none");
+            $("#comment-error").css("display", "none");
+            $("#comment-comment-section").show();
+            $("#add-comment-section").hide();
+            var authorName = $("#comment-author-" + commentId).val();
+            $("$reply-h3").html("Reply to: " + authorName);
+            $("#add-comment-section").show(commentId);
+        }
+
         function prepareComment() {
             $("#comment-success").css("display", "none");
             $("#comment-error").css("display", "none");
@@ -451,6 +495,57 @@ if (isset($_REQUEST['blog'])) {
                         else {
                             $("#comment-error").css("display", "block");
                             $("#comment-error").html("There was an error while adding your comment. Please try again later.");
+                        }
+                    }
+                });
+            }
+        });
+
+        $(document).on('submit', '#replyForm', function(e) {
+
+            e.preventDefault();
+
+            $("#reply-success").css("display", "none");
+            $("#reply-error").css("display", "none");
+
+            var name = $("#replyCName").val();
+            var email = $("#replyCEmail").val();
+            var reply = $("#replyCMessage").val();
+            var parentId = $("#commentParentId").val();
+
+            if (!name || !email || !reply) {
+                $("#reply-error").css("display", "block");
+                $("#reply-error").html("Please fill all fields.");
+            } else if (name.length > 50) {
+                $("#reply-error").css("display", "block");
+                $("#reply-error").html("The name input field can only be a max of 50 characters.");
+            } else if (email.length > 50) {
+                $("#reply-error").css("display", "block");
+                $("#reply-error").html("The email input field can only be a max of 50 characters.");
+            } else if (comment.length > 500) {
+                $("#reply-error").css("display", "block");
+                $("#reply-error").html("The message input field can only be a max of 500 characters.");
+            } else if (checkEmail(email) == false) {
+                $("#reply-error").css("display", "block");
+                $("#reply-error").html("Please enter a valid email address.");
+            } else {
+
+                var date = new Date();
+                var months = ["JAN", "FEB", "MAR", "APR", "MAY", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
+                var dateFormatted = months[date.getMonth()] + " " + date.getDate() + ", " + date.getFullYear();
+
+                $.ajax({
+                    method: "POST",
+                    url: "includes/add-reply.php",
+                    data: $(this).serialize(),
+                    success: function(data) {
+                        if (data == "success") {
+                            $("#reply-success").css("display", "block");
+                            $("#replyForm").hide();
+                        }
+                        else {
+                            $("#reply-error").css("display", "block");
+                            $("#reply-error").html("There was an error while adding your reply. Please try again later.");
                         }
                     }
                 });
