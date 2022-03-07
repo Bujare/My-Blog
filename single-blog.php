@@ -252,7 +252,7 @@ if (isset($_REQUEST['blog'])) {
                             <li class="depth-1 comment">
                                 <div class="comment__content">
                                     <div class="comment__info">
-                                        <input type="hidden" id="comment-author-<?php echo $commentId; ?>" valude="<?php echo $commentAuthor; ?>">
+                                        <input type="hidden" id="comment-author-<?php echo $commentId; ?>" value="<?php echo $commentAuthor; ?>">
                                         <div class="comment__author"><?php echo $commentAuthor; ?></div>
                                         <div class="comment__meta">
                                             <div class="comment__time"><?php echo date("M j, Y", strtotime($commentDate)); ?></div>
@@ -277,7 +277,7 @@ if (isset($_REQUEST['blog'])) {
                                 <li class="thread-alt depth-1 comment">
                                     <div class="comment__content">
                                         <div class="comment__info">
-                                            <input type="hidden" id="comment-author-<?php echo $commentId; ?>" valude="<?php echo $commentAuthor; ?>">
+                                            <input type="hidden" id="comment-author-<?php echo $commentId; ?>" value="<?php echo $commentAuthor; ?>">
                                             <div class="comment__author"><?php echo $commentAuthor; ?></div>
                                             <div class="comment__meta">
                                                 <div class="comment__time"><?php echo date("M j, Y", strtotime($commentDate)); ?></div>
@@ -330,7 +330,7 @@ if (isset($_REQUEST['blog'])) {
                 </div> <!-- end col-full -->
             </div> <!-- end comments -->
 
-            <div class="row comment-respond">
+            <div class="row comment-respond" id="reply-comment-section">
 
             <!-- START respond -->
             <div id="respond" class="column">
@@ -365,7 +365,7 @@ if (isset($_REQUEST['blog'])) {
 
             </div> <!-- end comment-respond -->
 
-            <div class="row comment-respond">
+            <div class="row comment-respond" id="add-comment-section">
 
                 <!-- START respond -->
                 <div id="respond" class="column">
@@ -435,17 +435,17 @@ if (isset($_REQUEST['blog'])) {
         function prepareReply(commentId) {
             $("#comment-success").css("display", "none");
             $("#comment-error").css("display", "none");
-            $("#comment-comment-section").show();
+            $("#reply-comment-section").show();
             $("#add-comment-section").hide();
             var authorName = $("#comment-author-" + commentId).val();
-            $("$reply-h3").html("Reply to: " + authorName);
-            $("#add-comment-section").show(commentId);
+            $("#reply-h3").html("Reply to: " + authorName);
+            $("#commentParentId").val(commentId);
         }
 
         function prepareComment() {
             $("#comment-success").css("display", "none");
             $("#comment-error").css("display", "none");
-            $("#comment-comment-section").hide();
+            $("#reply-comment-section").hide();
             $("#add-comment-section").show();
         }
 
@@ -522,12 +522,15 @@ if (isset($_REQUEST['blog'])) {
             } else if (email.length > 50) {
                 $("#reply-error").css("display", "block");
                 $("#reply-error").html("The email input field can only be a max of 50 characters.");
-            } else if (comment.length > 500) {
+            } else if (reply.length > 500) {
                 $("#reply-error").css("display", "block");
                 $("#reply-error").html("The message input field can only be a max of 500 characters.");
             } else if (checkEmail(email) == false) {
                 $("#reply-error").css("display", "block");
                 $("#reply-error").html("Please enter a valid email address.");
+            } else if (!parentId) {
+                $("#reply-error").css("display", "block");
+                $("#reply-error").html("There was an unexpected error. Try refreshing the page.");
             } else {
 
                 var date = new Date();
