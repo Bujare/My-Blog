@@ -2,22 +2,12 @@
 
 require "admin/includes/dbh.php";
 
-if (isset($_REQUEST['group'])) {
+if (isset($_REQUEST['query'])) {
     
-    $categoryPath = $_REQUEST['group'];
+    $searchQuery = $_REQUEST['query'];
 
-    $sqlGetCategory = "SELECT * FROM blog_category WHERE category_path = '$categoryPath'";
-    $queryGetCategory = mysqli_query($connection, $sqlGetCategory);
-
-    if ($rowGetCategory = mysqli_fetch_assoc($queryGetCategory)) {
-        $categoryId = $rowGetCategory['category_id'];
-        $categoryTitle = $rowGetCategory['category_title'];
-        $categoryMetaTitle = $rowGetCategory['category_meta_title'];
-    }
-    else {
-        header("Location: index.php");
-        exit();
-    }
+    $sqlGetSearchResults = "SELECT * FROM blog_tags INNER JOIN blog_post ON blog_tags.blog_post_id = blog_post.blog_post_id WHERE blog_tags.tag LIKE '%" . $searchQuery . "%' OR blog_post.post_title LIKE '%" . $searchQuery . "%'";
+    $queryGetSearchResults = mysqli_query($connection, $sqlGetSearchResults);
 
 ?>
 
@@ -28,7 +18,7 @@ if (isset($_REQUEST['group'])) {
     <!--- basic page needs
     ================================================== -->
     <meta charset="utf-8">
-    <title>Bujare's Blog | <?php echo $categoryMetaTitle; ?></title>
+    <title>Bujare's Blog | Search</title>
     <meta name="description" content="">
     <meta name="author" content="">
 
@@ -78,8 +68,8 @@ if (isset($_REQUEST['group'])) {
             <div class="row">
                 <div class="column large-12">
                     <h1 class="page-title">
-                        <span class="page-title__small-type">Category</span>
-                        <?php echo $categoryTitle; ?>
+                        <span class="page-title__small-type">Search Result For</span>
+                        <?php echo $searchQuery; ?>
                     </h1>
                 </div>
             </div>
@@ -102,16 +92,13 @@ if (isset($_REQUEST['group'])) {
                     </div>
 
                     <?php 
-                    
-                    $sqlGetAllBlogs = "SELECT * FROM blog_post WHERE category_id = '$categoryId' AND post_status = '1' ORDER BY blog_post_id DESC";
-                    $queryGetAllBlogs = mysqli_query($connection, $sqlGetAllBlogs);
 
-                    while ($rowGetAllBlogs = mysqli_fetch_assoc($queryGetAllBlogs)) {
+                    while ($rowGetSearchResults = mysqli_fetch_assoc($queryGetSearchResults)) {
 
-                        $blogTitle = $rowGetAllBlogs['post_title'];
-                        $blogPath = $rowGetAllBlogs['post_path'];
-                        $blogSummary = $rowGetAllBlogs['post_sumary'];
-                        $blogAltImageUrl = $rowGetAllBlogs['alt_image_url'];
+                        $blogTitle = $rowGetSearchResults['post_title'];
+                        $blogPath = $rowGetSearchResults['post_path'];
+                        $blogSummary = $rowGetSearchResults['post_sumary'];
+                        $blogAltImageUrl = $rowGetSearchResults['alt_image_url'];
                     
                     
                     ?>

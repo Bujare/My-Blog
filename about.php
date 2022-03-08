@@ -11,7 +11,7 @@ require "admin/includes/dbh.php";
     <!--- basic page needs
     ================================================== -->
     <meta charset="utf-8">
-    <title>About - Calvin</title>
+    <title>About - Blog</title>
     <meta name="description" content="">
     <meta name="author" content="">
 
