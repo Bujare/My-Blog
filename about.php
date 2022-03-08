@@ -69,7 +69,7 @@ require "admin/includes/dbh.php";
                     </div> <!-- end s-content__media -->
 
                     <div class="s-content__entry-header">
-                        <h1 class="s-content__title">Learn More About Story.</h1>
+                        <h1 class="s-content__title">About Me</h1>
                     </div> <!-- end s-content__entry-header -->
 
                     <div class="s-content__primary">

@@ -118,7 +118,7 @@ require "admin/includes/dbh.php";
                             <span class="byline"> 
                                 Posted by 
                                 <span class="author">
-                                    <a href="#">Test Test</a>
+                                    <a href="#">Bujare Ndrecaj</a>
                                 </span>
                             </span>
                         </div>
@@ -156,7 +156,7 @@ require "admin/includes/dbh.php";
                             <span class="byline"> 
                                 Posted by 
                                 <span class="author">
-                                    <a href="#0">Test Test</a>
+                                    <a href="#">Bujare Ndrecaj</a>
                                 </span>
                             </span>
                         </div>
